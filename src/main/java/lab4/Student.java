@@ -1,24 +1,11 @@
-package lab4;
-
-
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validation;
-import jakarta.validation.Validator;
-import jakarta.validation.constraints.PastOrPresent;
-import jakarta.validation.constraints.Pattern;
+package lab3;
 
 import java.time.LocalDate;
 import java.util.Objects;
-import java.util.Set;
 
 public class Student implements Comparable<Student> {
-
-    @Pattern(regexp = "[A-Z][a-z]{1,32}", message = "Name must consists only from letter, and first letter must be UpperCase")
     protected String name;
-
-    @Pattern(regexp = "[A-Z][a-z]{1,32}", message = "Surname must consists only from letter, and first letter must be UpperCase")
     protected String surname;
-    @PastOrPresent(message = "Date must be born")
     protected  LocalDate birthday;
 
     public String getName() {
@@ -100,39 +87,7 @@ public class Student implements Comparable<Student> {
          * @return returns new object of class "Student"
          */
         public Student build() {
-            validate(student);
             return student;
-        }
-    }
-
-    private static void validate(Student student) throws IllegalArgumentException {
-
-        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
-
-
-        Set<ConstraintViolation<Student>> check = validator.validate(student);
-
-        StringBuilder sb = new StringBuilder();
-
-        for(ConstraintViolation<Student> element : check){
-            sb.append("Error value "+element.getInvalidValue() + " because " + element.getMessage());
-            sb.append("\n");
-        }
-
-        if(sb.length() > 0){
-            throw new IllegalArgumentException(sb.toString());
-        }
-    }
-
-    public static void main(String args[]){
-        try{
-            Student st = new Student.Builder()
-                    .setName("Mariya")
-                    .setSurname("Didukh")
-                    .setBirthday(LocalDate.of(2022, 11, 18))
-                    .build();
-        } catch(IllegalArgumentException e){
-            System.out.println(e.getMessage());
         }
     }
 
