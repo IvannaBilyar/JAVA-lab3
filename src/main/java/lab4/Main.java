@@ -41,6 +41,12 @@ public class Main {
                 .setBirthday(LocalDate.of(1996, 8, 18))
                 .setDateOfEmployment(LocalDate.of(2018,11,25))
                 .setLanguage("English").build();
+        Teacher t6 = new Teacher.Builder()
+                .setName("Oksana")
+                .setSurname("Lazarenko")
+                .setBirthday(LocalDate.of(1990, 10, 29))
+                .setDateOfEmployment(LocalDate.of(2015,3,17))
+                .setLanguage("Japanese").build();
 
         List<Teacher> teachers = new ArrayList<Teacher>();
         teachers.add(t1);
@@ -48,6 +54,7 @@ public class Main {
         teachers.add(t3);
         teachers.add(t4);
         teachers.add(t5);
+        teachers.add(t6);
 
 //        System.out.println(teachers);
 
@@ -79,6 +86,20 @@ public class Main {
 
         System.out.println("\nTeachers sorted by foreign language (Stream): \\n");
         System.out.println(service.sortByLanguageStream());
+        
+        
+         System.out.println("\nFind teachers with surname Maksymenko : \\n");
+        System.out.println(service.findTeacherBySurname("Maksymenko"));
+
+        System.out.println("\nFind teachers with surname Maksymenko (Stream): \\n");
+        System.out.println(service.findTeacherBySurnameStream("Maksymenko"));
+
+
+        System.out.println("\nFind teachers who teach Japanese : \\n");
+        System.out.println(service.findTeacherByLanguage("Japanese"));
+
+        System.out.println("\nFind teachers who teach Japanese (Stream): \\n");
+        System.out.println(service.findTeacherByLanguageStream("Japanese"));
 
     }
 }
