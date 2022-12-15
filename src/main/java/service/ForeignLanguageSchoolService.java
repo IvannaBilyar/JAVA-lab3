@@ -47,5 +47,36 @@ public class ForeignLanguageSchoolService {
     public List<Teacher> sortByLanguageStream() {
         return school.getTeachers().stream().sorted(new TeacherLanguageComparator()).collect(Collectors.toList());
     }
+    
+     public List<Teacher> findTeacherBySurname(String teacherSurname){
+        List<Teacher> teachers = new ArrayList<>();
+        for(Teacher teacher: school.getTeachers()){
+            if(teacher.getSurname() == teacherSurname){
+                teachers.add(teacher);
+            }
+        }
+        return teachers;
+    }
+    
+      public List<Teacher> findTeacherBySurnameStream(String tSurname){
+        return school.getTeachers().stream().filter(teacherSurname -> teacherSurname.getSurname().contains(tSurname)).collect(Collectors.toList());
+    }
+  
+
+    public List<Teacher> findTeacherByLanguage(String lang){
+        List<Teacher> teachers = new ArrayList<>();
+        for(Teacher teacher: school.getTeachers()){
+            if(teacher.getLanguage() == lang){
+                teachers.add(teacher);
+            }
+        }
+        return teachers;
+    }
+    
+       public List<Teacher> findTeacherByLanguageStream(String tLanguage){
+        return school.getTeachers().stream().filter(lang-> lang.getLanguage().contains(tLanguage)).collect(Collectors.toList());
+    }
+    
+    
 
 }
